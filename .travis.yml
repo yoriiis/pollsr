@@ -17,7 +17,7 @@ cache:
 jobs:
   include:
     - before_script:
-        - yarn install --frozen-lockfile
+        - npm i
       script:
         - npm run test:markdown
         - npm run test:eslint
