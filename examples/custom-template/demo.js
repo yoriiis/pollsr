@@ -1,4 +1,4 @@
-import { PollsrCore, PollsrTemplate } from '../../dist/index.js'
+import { PollsrCore, PollsrTemplate } from '../../dist/pollsr.js'
 import datas from '../datas.json'
 
 class CustomTemplate extends PollsrTemplate {
@@ -13,8 +13,8 @@ const pollsrCore = new PollsrCore({
 	element: document.querySelector('#pollsr-1'),
 	template: new CustomTemplate(),
 	datas: firstPollsr,
-	onAction: () => {
-		console.log('Voted')
+	onAction: answerId => {
+		console.log('Voted', answerId)
 	}
 })
 

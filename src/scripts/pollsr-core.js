@@ -1,12 +1,20 @@
 import PollsrTemplate from './pollsr-template'
 
+/**
+ * @license MIT
+ * @name Pollsr
+ * @version 1.0.0
+ * @author: Yoriiis aka Joris DANIEL <joris.daniel@gmail.com>
+ * @description:
+ * {@link https://github.com/yoriiis/pollsr}
+ * @copyright 2020 Joris DANIEL
+ **/
+
 export default class PollsrCore {
 	/**
 	 * @param {options}
 	 */
 	constructor (options) {
-		this.events = {}
-
 		const userOptions = options || {}
 		const defaultOptions = {
 			element: null,
@@ -18,27 +26,26 @@ export default class PollsrCore {
 
 		// Merge default options with user options
 		this.options = Object.assign(defaultOptions, userOptions)
-
-		// Get element id in attribute "id"
-		this.id = this.options.element.getAttribute('id').match(/[0-9]+/g)[0]
 	}
 
 	/**
-	 * Create the Pollsr by get datas from the web service and initialize the template.
+	 * Create the Pollsr with datas and initialize the template.
 	 *
 	 * @returns {Promise} with web service datas in parameter
 	 */
 	create () {
-		// If user use the default template, load it by dynamic import
+		// If user use the default template, inject it
 		if (this.options.template === null) {
 			// Instanciate the default PollsrTemplate class
 			this.options.template = new PollsrTemplate()
 		}
 
-		// Else, user use a custom template, check that the class has a function init
+		// Initialize the template
 		if (typeof this.options.template.init === 'function') {
 			// Init the template and resolve the create promise
 			this.initTemplate()
+		} else {
+			throw new Error('Pollsr::PollsrTemplate need an "init" function.')
 		}
 	}
 

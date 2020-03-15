@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
 	return {
 		watch: !isProduction,
 		entry: {
-			index: './src/scripts/index.js'
+			pollsr: './src/scripts/index.js'
 		},
 		watchOptions: {
 			ignored: /node_modules/

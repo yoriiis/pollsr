@@ -1,5 +1,25 @@
 .pollsr {
     text-align: center;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+
+    &::before {
+        content: "";
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 250ms ease-out, visibility 250ms ease-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+    }
 
     .pollsr-button {
         cursor: pointer;
@@ -9,12 +29,34 @@
         position: relative;
         margin: 0;
         padding: 0;
+        background-color: transparent;
+        border: none;
+        font-family: inherit;
+
+        & * {
+            pointer-events: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &.has-voted {
+        &::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .pollsr-button {
             cursor: default;
         }
+    }
+
+    &-question {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 18px;
     }
 
     figure {
@@ -28,17 +70,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        position: relative;
-        z-index: 0;
-
-        .pollsr-icons,
-        p {
-            z-index: 1;
-        }
+        padding-left: 20px;
+        font-size: 14px;
     }
 
     .pollsr-picture {
-        position: relative;
         width: 80px;
 
         & + figcaption {
@@ -49,6 +85,7 @@
             display: block;
             width: 100%;
             height: auto;
+            border-radius: 50%;
         }
     }
 
@@ -59,5 +96,18 @@
 
     &-listAnswers {
         list-style-type: none;
+        padding: 10px;
+        border-bottom: 1px solid #f6f6f6;
+        transition: background 250ms ease-out;
+
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
     }
 }
