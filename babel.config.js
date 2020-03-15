@@ -10,10 +10,7 @@ module.exports = function (api) {
 		]
 	]
 
-	const plugins = [
-		'@babel/plugin-transform-modules-commonjs',
-		'@babel/plugin-proposal-class-properties'
-	]
+	const plugins = ['@babel/plugin-proposal-class-properties']
 
 	api.cache.using(() => process.env.NODE_ENV)
 
