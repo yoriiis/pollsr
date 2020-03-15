@@ -4,7 +4,7 @@ export default class PollsrTemplate {
 	/**
 	 * Function to instanciate the template
 	 *
-	 * @param {Object} core Context of the Core instance
+	 * @param {Object} options PollsrCore option
 	 */
 	init ({ options }) {
 		this.options = options
@@ -14,7 +14,7 @@ export default class PollsrTemplate {
 
 		this.addEvents()
 
-		// Update template only if user has already vote
+		// Update template only if user has already voted
 		if (this.options.hasVoted) {
 			this.updateTemplateAfterVote()
 		}
@@ -40,9 +40,10 @@ export default class PollsrTemplate {
 			let image = ''
 			if (answer.image) {
 				image = `<div class="pollsr-picture">
-							<img src="${answer.image}" alt="" />
+							<img src="${answer.image}" alt="${answer.title}" />
 						</div>`
 			}
+
 			html += `<li class="pollsr-listAnswers">
 						<button class="pollsr-button" data-answer-id="${answer.id}" data-pollsr-respond>
 							<figure>
@@ -72,15 +73,18 @@ export default class PollsrTemplate {
 	 */
 	addEvents () {
 		// Add callback listener on property class for the destroy method
-		this.onClickToRespond = e => {
-			this.clickToRespond(e)
+		this.onClickToElement = e => {
+			const target = e.target
+			if (
+				target.nodeName.toLowerCase() === 'button' &&
+				target.hasAttribute('data-pollsr-respond')
+			) {
+				// Add click event listener on all answers
+				this.clickToRespond(e)
+			}
 		}
 
-		// Add click event listener on all answers
-		const answers = [...this.options.element.querySelectorAll('[data-pollsr-respond]')]
-		answers.forEach(answer => {
-			answer.addEventListener('click', this.onClickToRespond, false)
-		})
+		this.options.element.addEventListener('click', this.onClickToElement, false)
 	}
 
 	/**
@@ -90,33 +94,27 @@ export default class PollsrTemplate {
 	 */
 	clickToRespond = async e => {
 		e.preventDefault()
-
 		// Check if user has not yet voted
 		if (!this.options.hasVoted) {
 			this.options.hasVoted = true
 			if (typeof this.options.onAction === 'function') {
-				await this.options.onAction()
+				await this.options.onAction(e.currentTarget.getAttribute('data-answer-id'))
 				this.updateTemplateAfterVote()
 			}
 		}
 	}
 
 	/**
-	 * Update the template after the vote (counter, state, progress bar)
+	 * Update the template after the vote
 	 */
 	updateTemplateAfterVote () {
-		if (this.options.element.querySelector('.pollsr') !== null) {
-			this.options.element.querySelector('.pollsr').classList.add('has-voted')
-		}
+		this.options.element.querySelector('.pollsr').classList.add('has-voted')
 	}
 
 	/**
-	 * Destroy method to reset the Pollsr (events, class properties)
+	 * Destroy method to reset the Pollsr template (events, class properties)
 	 */
 	destroy () {
-		const answers = [...this.options.element.querySelectorAll('.pollsr-button')]
-		answers.forEach(answer => {
-			answer.removeEventListener('click', this.onClickToRespond)
-		})
+		this.options.element.removeEventListener('click', this.onClickToElement)
 	}
 }
