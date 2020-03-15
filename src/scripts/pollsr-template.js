@@ -98,7 +98,7 @@ export default class PollsrTemplate {
 		if (!this.options.hasVoted) {
 			this.options.hasVoted = true
 			if (typeof this.options.onAction === 'function') {
-				await this.options.onAction(e.currentTarget.getAttribute('data-answer-id'))
+				await this.options.onAction(e.target.getAttribute('data-answer-id'))
 				this.updateTemplateAfterVote()
 			}
 		}
