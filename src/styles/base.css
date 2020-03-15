@@ -1,0 +1,63 @@
+.pollsr {
+    text-align: center;
+
+    .pollsr-button {
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+
+    &.has-voted {
+        .pollsr-button {
+            cursor: default;
+        }
+    }
+
+    figure {
+        display: flex;
+        align-items: center;
+        align-items: stretch;
+        margin: 0;
+    }
+
+    figcaption {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        z-index: 0;
+
+        .pollsr-icons,
+        p {
+            z-index: 1;
+        }
+    }
+
+    .pollsr-picture {
+        position: relative;
+        width: 80px;
+
+        & + figcaption {
+            width: calc(100% - 80px);
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &-answers {
+        padding-left: 0;
+        margin: 0;
+    }
+
+    &-listAnswers {
+        list-style-type: none;
+    }
+}

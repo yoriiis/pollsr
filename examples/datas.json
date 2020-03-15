@@ -1,0 +1,20 @@
+{
+  "pollsr": [
+    {
+      "id": 1,
+      "question": "Who is your favorite actor?",
+      "answers": [
+        {
+          "id": 1,
+          "title": "Will Smith",
+          "image": "https://image.tmdb.org/t/p/w90_and_h90_face/eze9FO9VuryXLP0aF2cRqPCcibN.jpg"
+        },
+        {
+          "id": 2,
+          "title": "Bruce Willis",
+          "image": "https://image.tmdb.org/t/p/w90_and_h90_face/2B7RySy2WMVJKKEFN2XA3IFb8w0.jpg"
+        }
+      ]
+    }
+  ]
+}
