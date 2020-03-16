@@ -9,8 +9,8 @@ let pollsrCore;
 const getOptions = () => {
 	return {
 		element: document.querySelector('#pollsr-1'),
-		hasVoted: false,
 		datas: datas,
+		hasVoted: false,
 		onAction: answerId => {}
 	};
 };

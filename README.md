@@ -1,6 +1,6 @@
 # Pollsr
 
-![Pollsr](https://img.shields.io/badge/pollsr-v1.0.0-546e7a.svg?style=for-the-badge) [![TravisCI](https://img.shields.io/travis/com/yoriiis/chunks-webpack-plugin/master?style=for-the-badge)](https://travis-ci.com/yoriiis/chunks-webpack-plugin) [![Coverage Status](https://img.shields.io/coveralls/github/yoriiis/chunks-webpack-plugin?style=for-the-badge)](https://coveralls.io/github/yoriiis/chunks-webpack-plugin?branch=master) ![Node.js](https://img.shields.io/node/v/chunks-webpack-plugin?style=for-the-badge) [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/chunks-webpack-plugin?style=for-the-badge)](https://bundlephobia.com/result?p=fela@latest)
+![Pollsr](https://img.shields.io/badge/pollsr-v1.0.0-ff004b.svg?style=for-the-badge) [![TravisCI](https://img.shields.io/travis/com/yoriiis/chunks-webpack-plugin/master?style=for-the-badge)](https://travis-ci.com/yoriiis/chunks-webpack-plugin) [![Coverage Status](https://img.shields.io/coveralls/github/yoriiis/chunks-webpack-plugin?style=for-the-badge)](https://coveralls.io/github/yoriiis/chunks-webpack-plugin?branch=master) ![Node.js](https://img.shields.io/node/v/chunks-webpack-plugin?style=for-the-badge) [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/chunks-webpack-plugin?style=for-the-badge)](https://bundlephobia.com/result?p=fela@latest)
 
 Pollsr is a **minimalist** library to dynamically create polls with a elegante default theme.
 
@@ -54,6 +54,10 @@ In case of JSON fields updates, use the `PollsrTemplate` and update `getTemplate
 
 Instanciate the Pollsr element like the following example.
 
+> The `hasVoted` parameter must be set at initialize to reflect if the user has already voted. On vote action, the parameter is automatically updated.
+>
+> The `onAction` parameter allows to call a function on the vote action, for example save the data with a http request, in the browser storage or what you want.
+
 ```html
 <div id="pollsr-1"></div>
 ```
@@ -65,6 +69,7 @@ import datas from "datas.json";
 const pollsrCore = new PollsrCore({
     element: document.querySelector("#pollsr-1"),
     datas: datas,
+    hasVoted: false,
     onAction: answerId => {
         // Put here the action on answer click event (post, fetch, localStorage, etc.)
     }
@@ -80,8 +85,8 @@ You can pass configuration options to `PollsrCore`. Example below show all defau
     element: null,
     template: null,
     datas: null,
-    onAction: null,
-    hasVoted: false
+    hasVoted: false,
+    onAction: null
 }
 ```
 
@@ -101,14 +106,18 @@ Create a new file `custom-pollsr-template.js` for the custom template. Example b
 import { PollsrTemplate } from "pollsr";
 
 class CustomTemplate extends PollsrTemplate {
+
     updateTemplateAfterVote() {
+
         super.updateTemplateAfterVote();
         this.options.element
             .querySelector(`.pollsr-button[data-answer-id="${answerId}"]`)
             .parentNode.classList.add("active");
+
     }
 
     getTemplate(datas) {
+
         return `<div class="pollsr${this.options.hasVoted ? " has-voted" : ""}">
                     <p class="pollsr-question">Hey, ${datas.question}</p>
                     <ul class="pollsr-answers">
@@ -116,6 +125,7 @@ class CustomTemplate extends PollsrTemplate {
                     </ul>
                     <a href="https://www.themoviedb.org" class="pollsr-footer">Source: TMDb</a>
                 </div>`;
+
     }
 }
 ```
