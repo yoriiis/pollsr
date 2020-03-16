@@ -1,20 +1,21 @@
 {
-  "pollsr": [
-    {
-      "id": 1,
-      "question": "Who is your favorite actor?",
-      "answers": [
-        {
-          "id": 1,
-          "title": "Will Smith",
-          "image": "https://image.tmdb.org/t/p/w90_and_h90_face/eze9FO9VuryXLP0aF2cRqPCcibN.jpg"
-        },
-        {
-          "id": 2,
-          "title": "Bruce Willis",
-          "image": "https://image.tmdb.org/t/p/w90_and_h90_face/2B7RySy2WMVJKKEFN2XA3IFb8w0.jpg"
-        }
-      ]
-    }
-  ]
+	"id": 1,
+	"question": "Who is your favorite actor?",
+	"answers": [
+		{
+			"id": 1,
+			"title": "Tom Hanks",
+			"image": "https://image.tmdb.org/t/p/w235_and_h235_face/2gY92j2lkNHL2cThBhPmgXLd5PL.jpg"
+		},
+		{
+			"id": 2,
+			"title": "Bruce Willis",
+			"image": "https://image.tmdb.org/t/p/w90_and_h90_face/2B7RySy2WMVJKKEFN2XA3IFb8w0.jpg"
+		},
+		{
+			"id": 3,
+			"title": "Brad Pitt",
+			"image": "https://image.tmdb.org/t/p/w235_and_h235_face/kU3B75TyRiCgE270EyZnHjfivoq.jpg"
+		}
+	]
 }

@@ -4,4 +4,4 @@ module.exports = {
 		indentation: 4,
 		'unit-whitelist': ['em', 'rem', '%', 'px', 's', 'deg', 'fr', 'vh', 'ms']
 	}
-}
+};

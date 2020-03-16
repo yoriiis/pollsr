@@ -1,4 +1,4 @@
-import '../styles/base.css'
+import '../styles/base.css';
 
 export default class PollsrTemplate {
 	/**
@@ -7,16 +7,16 @@ export default class PollsrTemplate {
 	 * @param {Object} options PollsrCore option
 	 */
 	init ({ options }) {
-		this.options = options
+		this.options = options;
 
 		// Build DOM with the template function
-		this.buildDOM(this.getTemplate(this.options.datas))
+		this.buildDOM(this.getTemplate(this.options.datas));
 
-		this.addEvents()
+		this.addEvents();
 
 		// Update template only if user has already voted
 		if (this.options.hasVoted) {
-			this.updateTemplateAfterVote()
+			this.updateTemplateAfterVote();
 		}
 	}
 
@@ -31,20 +31,20 @@ export default class PollsrTemplate {
 					<ul class="pollsr-answers">
 						${this.getAnswersList(datas.answers)}
 					</ul>
-				</div>`
+				</div>`;
 	}
 
 	getAnswersList (answers) {
-		let html = ''
+		let html = '';
 		answers.forEach(answer => {
-			let image = ''
+			let image = '';
 			if (answer.image) {
 				image = `<div class="pollsr-picture">
 							<img src="${answer.image}" alt="${answer.title}" />
-						</div>`
+						</div>`;
 			}
 
-			html += `<li class="pollsr-listAnswers">
+			html += `<li class="pollsr-answerItem">
 						<button class="pollsr-button" data-answer-id="${answer.id}" data-pollsr-respond>
 							<figure>
 								${image}
@@ -53,10 +53,10 @@ export default class PollsrTemplate {
 								</figcaption>
 							</figure>
 						</button>
-					</li>`
-		})
+					</li>`;
+		});
 
-		return html
+		return html;
 	}
 
 	/**
@@ -65,7 +65,7 @@ export default class PollsrTemplate {
 	 * @param {Function} template Function to return the template
 	 */
 	buildDOM (template) {
-		this.options.element.insertAdjacentHTML('beforeend', template)
+		this.options.element.insertAdjacentHTML('beforeend', template);
 	}
 
 	/**
@@ -74,17 +74,17 @@ export default class PollsrTemplate {
 	addEvents () {
 		// Add callback listener on property class for the destroy method
 		this.onClickToElement = e => {
-			const target = e.target
+			const target = e.target;
 			if (
 				target.nodeName.toLowerCase() === 'button' &&
 				target.hasAttribute('data-pollsr-respond')
 			) {
 				// Add click event listener on all answers
-				this.clickToRespond(e)
+				this.clickToRespond(e);
 			}
-		}
+		};
 
-		this.options.element.addEventListener('click', this.onClickToElement, false)
+		this.options.element.addEventListener('click', this.onClickToElement, false);
 	}
 
 	/**
@@ -93,28 +93,30 @@ export default class PollsrTemplate {
 	 * @param {Event} e Event listener parameter
 	 */
 	clickToRespond = async e => {
-		e.preventDefault()
+		e.preventDefault();
 		// Check if user has not yet voted
 		if (!this.options.hasVoted) {
-			this.options.hasVoted = true
+			this.options.hasVoted = true;
 			if (typeof this.options.onAction === 'function') {
-				await this.options.onAction(e.target.getAttribute('data-answer-id'))
-				this.updateTemplateAfterVote()
+				this.currentAnswer = e.target.getAttribute('data-answer-id');
+				await this.options.onAction(this.currentAnswer);
+				this.updateTemplateAfterVote();
 			}
 		}
-	}
+	};
 
 	/**
 	 * Update the template after the vote
 	 */
 	updateTemplateAfterVote () {
-		this.options.element.querySelector('.pollsr').classList.add('has-voted')
+		this.options.element.querySelector('.pollsr').classList.add('has-voted');
 	}
 
 	/**
 	 * Destroy method to reset the Pollsr template (events, class properties)
 	 */
 	destroy () {
-		this.options.element.removeEventListener('click', this.onClickToElement)
+		this.options.element.removeEventListener('click', this.onClickToElement);
+		this.options.element.removeChild(this.options.element.querySelector('.pollsr'));
 	}
 }

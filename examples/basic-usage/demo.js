@@ -1,14 +1,13 @@
-import { PollsrCore } from '../../dist/pollsr.js'
-import datas from '../datas.json'
+import { PollsrCore } from '../../dist/pollsr.js';
+import datas from '../datas.json';
 
-const firstPollsr = datas.pollsr[0]
 const pollsrCore = new PollsrCore({
 	element: document.querySelector('#pollsr-1'),
-	datas: firstPollsr,
+	datas: datas,
 	onAction: answerId => {
-		console.log('Voted', answerId)
+		console.log('PollsrCore::onAction', `answerId=${answerId}`);
 	}
-})
+});
 
 // Create the Pollsr from the instance
-pollsrCore.create()
+pollsrCore.create();

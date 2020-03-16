@@ -3,3 +3,12 @@
     max-width: 500px;
     margin: 0 auto;
 }
+
+.pollsr-footer {
+    color: #000;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    text-decoration: none;
+    font-size: 10px;
+}

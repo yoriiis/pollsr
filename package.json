@@ -1,11 +1,11 @@
 {
 	"name": "pollsr",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Pollsr library to dynamically create polls with a elegante default theme",
 	"homepage": "https://github.com/yoriiis/pollsr",
 	"bugs": "https://github.com/yoriiis/pollsr/issues",
 	"repository": "https://github.com/yoriiis/pollsr.git",
-	"author": "Joris DANIEL",
+	"author": "Yoriiis aka Joris DANIEL",
 	"main": "dist/scripts/pollsr.js",
 	"scripts": {
 		"build": "rm -rf ./dist/ && webpack --mode=production",
