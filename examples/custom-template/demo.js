@@ -6,9 +6,12 @@ const answerId = window.sessionStorage.getItem('pollsr-answer');
 class CustomTemplate extends PollsrTemplate {
 	updateTemplateAfterVote () {
 		super.updateTemplateAfterVote();
-		this.options.element
-			.querySelector(`.pollsr-button[data-answer-id="${answerId}"]`)
-			.parentNode.classList.add('active');
+
+		if (answerId) {
+			this.options.element
+				.querySelector(`.pollsr-button[data-answer-id="${answerId}"]`)
+				.parentNode.classList.add('active');
+		}
 	}
 
 	getTemplate (datas) {
