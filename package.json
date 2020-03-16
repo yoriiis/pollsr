@@ -1,6 +1,6 @@
 {
 	"name": "pollsr",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Pollsr library to dynamically create polls with a minimalist elegant theme",
 	"keywords": [
 		"polls",

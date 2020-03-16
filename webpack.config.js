@@ -81,9 +81,9 @@ module.exports = (env, argv) => {
 					parallel: true,
 					sourceMap: false,
 					terserOptions: {
-						extractComments: 'all',
+						extractComments: false,
 						compress: {
-							drop_console: false
+							drop_console: true
 						},
 						mangle: true
 					}
