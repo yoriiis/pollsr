@@ -4,7 +4,7 @@ coverage
 examples/
 gh-pages/
 src/
-.browserlistrc
+.browserslistrc
 .editorconfig
 .eslintignore
 .eslintrc.js
