@@ -10,8 +10,8 @@ export default class PollsrCore {
 			element: null,
 			template: null,
 			datas: null,
-			onAction: null,
-			hasVoted: false
+			hasVoted: false,
+			onAction: null
 		};
 
 		// Merge default options with user options
