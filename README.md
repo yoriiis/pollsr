@@ -108,16 +108,14 @@ import { PollsrTemplate } from "pollsr";
 class CustomTemplate extends PollsrTemplate {
 
     updateTemplateAfterVote() {
-
         super.updateTemplateAfterVote();
+
         this.options.element
             .querySelector(`.pollsr-button[data-answer-id="${answerId}"]`)
             .parentNode.classList.add("active");
-
     }
 
     getTemplate(datas) {
-
         return `<div class="pollsr${this.options.hasVoted ? " has-voted" : ""}">
                     <p class="pollsr-question">Hey, ${datas.question}</p>
                     <ul class="pollsr-answers">
@@ -125,7 +123,6 @@ class CustomTemplate extends PollsrTemplate {
                     </ul>
                     <a href="https://www.themoviedb.org" class="pollsr-footer">Source: TMDb</a>
                 </div>`;
-
     }
 }
 ```
