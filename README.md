@@ -6,7 +6,11 @@ Pollsr is a **minimalist** library to dynamically create polls with a elegante d
 
 Instanciate on the fly with lazyload, dynamic import or intersection observer for more flexibility and better UX performance.
 
-![List result](examples/assets/screenshot.jpg)
+<p align="center">
+    <a href="https://yoriiis.github.io/pollsr" title="Pollsr demo">
+        <img src="examples/assets/screenshot.jpg" alt="Pollsr example" width="500px" />
+    </a>
+</p>
 
 ## Installation
 

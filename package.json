@@ -1,7 +1,7 @@
 {
 	"name": "pollsr",
 	"version": "1.0.0",
-	"description": "Pollsr library to dynamically create polls with a elegante default theme",
+	"description": "Pollsr library to dynamically create polls with a minimalist elegant theme",
 	"homepage": "https://github.com/yoriiis/pollsr",
 	"bugs": "https://github.com/yoriiis/pollsr/issues",
 	"repository": "https://github.com/yoriiis/pollsr.git",
