@@ -8,18 +8,18 @@ module.exports = function (api) {
 				}
 			}
 		]
-	]
+	];
 
-	const plugins = ['@babel/plugin-proposal-class-properties']
+	const plugins = ['@babel/plugin-proposal-class-properties'];
 
-	api.cache.using(() => process.env.NODE_ENV)
+	api.cache.using(() => process.env.NODE_ENV);
 
 	if (api.env('test')) {
-		plugins.push('babel-plugin-dynamic-import-node')
+		plugins.push('babel-plugin-dynamic-import-node');
 	}
 
 	return {
 		presets,
 		plugins
-	}
-}
+	};
+};

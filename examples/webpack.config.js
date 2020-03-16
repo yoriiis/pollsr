@@ -1,12 +1,12 @@
-const path = require('path')
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env, argv) => {
-	const isProduction = argv.mode === 'production'
+	const isProduction = argv.mode === 'production';
 
 	return {
 		watch: !isProduction,
@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
 			rules: [
 				{
 					test: /\.js$/,
-					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../src')],
+					include: [path.resolve(__dirname, './src')],
 					use: [
 						{
 							loader: 'babel-loader'
@@ -36,7 +36,7 @@ module.exports = (env, argv) => {
 				},
 				{
 					test: /\.css$/,
-					include: [path.resolve(__dirname, './src'), path.resolve(__dirname, '../src')],
+					include: [path.resolve(__dirname, './src')],
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
@@ -100,5 +100,5 @@ module.exports = (env, argv) => {
 			providedExports: false,
 			splitChunks: false
 		}
-	}
-}
+	};
+};

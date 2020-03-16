@@ -4,3 +4,4 @@ node_modules
 examples/dist
 dist
 coverage
+gh-pages/assets

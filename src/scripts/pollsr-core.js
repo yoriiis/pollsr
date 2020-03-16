@@ -1,31 +1,21 @@
-import PollsrTemplate from './pollsr-template'
-
-/**
- * @license MIT
- * @name Pollsr
- * @version 1.0.0
- * @author: Yoriiis aka Joris DANIEL <joris.daniel@gmail.com>
- * @description:
- * {@link https://github.com/yoriiis/pollsr}
- * @copyright 2020 Joris DANIEL
- **/
+import PollsrTemplate from './pollsr-template';
 
 export default class PollsrCore {
 	/**
 	 * @param {options}
 	 */
 	constructor (options) {
-		const userOptions = options || {}
+		const userOptions = options || {};
 		const defaultOptions = {
 			element: null,
 			template: null,
 			datas: null,
 			onAction: null,
 			hasVoted: false
-		}
+		};
 
 		// Merge default options with user options
-		this.options = Object.assign(defaultOptions, userOptions)
+		this.options = Object.assign(defaultOptions, userOptions);
 	}
 
 	/**
@@ -37,15 +27,15 @@ export default class PollsrCore {
 		// If user use the default template, inject it
 		if (this.options.template === null) {
 			// Instanciate the default PollsrTemplate class
-			this.options.template = new PollsrTemplate()
+			this.options.template = new PollsrTemplate();
 		}
 
 		// Initialize the template
 		if (typeof this.options.template.init === 'function') {
 			// Init the template and resolve the create promise
-			this.initTemplate()
+			this.initTemplate();
 		} else {
-			throw new Error('Pollsr::PollsrTemplate need an "init" function.')
+			throw new Error('Pollsr::PollsrTemplate need an "init" function.');
 		}
 	}
 
@@ -57,14 +47,13 @@ export default class PollsrCore {
 	initTemplate () {
 		this.options.template.init({
 			options: this.options
-		})
+		});
 	}
 
 	/**
 	 * Destroy method to reset the Pollsr (events, class properties, template)
 	 */
 	destroy () {
-		this.options.template.destroy()
-		this.options.element.removeChild(this.options.element.querySelector('.pollsr'))
+		this.options.template.destroy();
 	}
 }
