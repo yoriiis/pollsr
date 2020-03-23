@@ -68,5 +68,8 @@
 		"webpack": "4.41.5",
 		"webpack-cli": "3.3.10",
 		"webpack-manifest-plugin": "2.2.0"
+	},
+	"engines": {
+		"node": ">=8.11.2"
 	}
 }
