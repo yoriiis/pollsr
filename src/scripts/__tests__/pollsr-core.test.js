@@ -24,9 +24,9 @@ beforeEach(() => {
 	pollsrCore = getInstance();
 });
 
-describe('PollsrCore function', () => {
-	it('Should initialize the constructor', () => {
-		expect(pollsrCore.options).toMatchObject({
+describe('PollsrCore constructor', () => {
+	it('Should initialize the constructor with custom options', () => {
+		expect(pollsrCore.options).toEqual({
 			element: expect.any(HTMLDivElement),
 			datas: datas,
 			hasVoted: false,
@@ -35,10 +35,10 @@ describe('PollsrCore function', () => {
 		});
 	});
 
-	it('Should initialize the constructor without options', () => {
+	it('Should initialize the constructor function without options', () => {
 		const instance = new PollsrCore();
 
-		expect(instance.options).toMatchObject({
+		expect(instance.options).toEqual({
 			element: null,
 			template: null,
 			datas: null,
@@ -46,40 +46,62 @@ describe('PollsrCore function', () => {
 			hasVoted: false
 		});
 	});
+});
 
-	it('Should create the pollsr', () => {
+describe('PollsrCore create', () => {
+	it('Should call the create function', () => {
 		pollsrCore.initTemplate = jest.fn();
 
 		pollsrCore.create();
 
 		expect(pollsrCore.initTemplate).toHaveBeenCalled();
+		expect(pollsrCore.options.template).toBeInstanceOf(PollsrTemplate);
 	});
 
-	it('Should create the pollsr without init method inside the template', () => {
-		pollsrCore.initTemplate = jest.fn();
+	it('Should call the create function without already a template', () => {
+		const template = {
+			init: () => true
+		};
+		pollsrCore.options.template = template;
 
-		pollsrCore.options.template = {};
-		pollsrCore.options.template.init = null;
+		pollsrCore.create();
+
+		expect(pollsrCore.options.template).toEqual(template);
+	});
+
+	it('Should call the create function without init method inside the template', () => {
+		pollsrCore.options.template = {
+			init: null
+		};
 
 		expect(() => {
 			pollsrCore.create();
 		}).toThrow(new Error('Pollsr::PollsrTemplate need an "init" function.'));
 	});
+});
 
-	it('Should initialize the template', () => {
-		pollsrCore.options.template = new PollsrTemplate();
+describe('PollsrCore initTemplate', () => {
+	it('Should call the initTemplate function', () => {
+		pollsrCore.options.template = {
+			init: () => {}
+		};
+
 		pollsrCore.options.template.init = jest.fn();
 
-		pollsrCore.create();
+		pollsrCore.initTemplate();
 
 		expect(pollsrCore.options.template.init).toHaveBeenCalled();
 	});
+});
 
-	it('Should destroy the pollsrCore', () => {
-		pollsrCore.options.template = new PollsrTemplate();
+describe('PollsrCore destroy', () => {
+	it('Should call the destroy function', () => {
+		pollsrCore.options.template = {
+			destroy: () => true
+		};
+
 		pollsrCore.options.template.destroy = jest.fn();
 
-		pollsrCore.create();
 		pollsrCore.destroy();
 
 		expect(pollsrCore.options.template.destroy).toHaveBeenCalled();

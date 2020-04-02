@@ -6,7 +6,7 @@ export default class PollsrTemplate {
 	 *
 	 * @param {Object} options PollsrCore option
 	 */
-	init ({ options }) {
+	init (options) {
 		this.options = options;
 
 		// Build DOM with the template function

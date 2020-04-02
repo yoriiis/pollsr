@@ -56,7 +56,10 @@ export default class PollsrCore {
 	 */
 	initTemplate () {
 		this.options.template.init({
-			options: this.options
+			element: this.options.element,
+			datas: this.options.datas,
+			hasVoted: this.options.hasVoted,
+			onAction: this.options.onAction
 		});
 	}
 
