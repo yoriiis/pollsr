@@ -1,6 +1,6 @@
 {
 	"name": "pollsr",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Pollsr library to dynamically create polls with a minimalist elegant theme",
 	"keywords": [
 		"polls",
@@ -23,10 +23,92 @@
 		"start:example": "rm -rf ./examples/dist/ && webpack --config=./examples/webpack.config.js --mode=development",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"test:eslint": "eslint -c ./.eslintrc.js .",
+		"test:eslint": "eslint . --ignore-pattern dist --ignore-pattern examples/dist --ignore-pattern gh-pages",
 		"test:markdown": "markdownlint '**/*.md' --ignore node_modules --ignore demo/node_modules",
-		"test:stylelint": "stylelint './src/**/*.css' --config ./stylelint.config.js",
+		"test:stylelint": "stylelint './src/**/*.css'",
 		"test:watch": "jest --watchAll --coverage"
+	},
+	"babel": {
+		"plugins": [
+			"babel-plugin-dynamic-import-node",
+			"@babel/plugin-proposal-class-properties"
+		],
+		"presets": [
+			[
+				"@babel/preset-env",
+				{
+					"targets": {
+						"node": "8.11.2"
+					}
+				}
+			]
+		]
+	},
+	"browserslist": [
+		"last 5 version"
+	],
+	"prettier": {
+		"printWidth": 100
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"es6": true,
+			"jest": true,
+			"node": true
+		},
+		"parser": "babel-eslint",
+		"parserOptions": {
+			"ecmaFeatures": {
+				"impliedStrict": true,
+				"experimentalObjectRestSpread": true
+			},
+			"ecmaVersion": 6,
+			"sourceType": "module"
+		},
+		"extends": "standard",
+		"rules": {
+			"indent": [
+				"error",
+				"tab",
+				{
+					"ignoredNodes": [
+						"TemplateLiteral > *"
+					]
+				}
+			],
+			"no-console": 0,
+			"no-tabs": 0,
+			"semi": [
+				1,
+				"always"
+			]
+		},
+		"globals": {
+			"document": false,
+			"window": false
+		}
+	},
+	"stylelint": {
+		"extends": "stylelint-config-standard",
+		"rules": {
+			"indentation": 4,
+			"unit-whitelist": [
+				"%",
+				"px",
+				"ms"
+			]
+		}
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"js",
+			"css"
+		],
+		"moduleNameMapper": {
+			"\\.(css)$": "identity-obj-proxy"
+		},
+		"verbose": true
 	},
 	"dependencies": {},
 	"devDependencies": {

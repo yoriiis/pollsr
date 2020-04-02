@@ -1,13 +1,12 @@
 import { PollsrCore, PollsrTemplate } from '../../dist/pollsr.js';
 import datas from '../datas.json';
 
-const answerId = window.sessionStorage.getItem('pollsr-answer');
-
 class CustomTemplate extends PollsrTemplate {
 	updateTemplateAfterVote () {
 		super.updateTemplateAfterVote();
 
-		if (answerId) {
+		if (this.options.hasVoted) {
+			const answerId = window.sessionStorage.getItem('pollsr-answer');
 			this.options.element
 				.querySelector(`.pollsr-button[data-answer-id="${answerId}"]`)
 				.parentNode.classList.add('active');
@@ -25,6 +24,7 @@ class CustomTemplate extends PollsrTemplate {
 	}
 }
 
+const answerId = window.sessionStorage.getItem('pollsr-answer');
 const pollsrCore = new PollsrCore({
 	element: document.querySelector('#pollsr-1'),
 	template: new CustomTemplate(),
